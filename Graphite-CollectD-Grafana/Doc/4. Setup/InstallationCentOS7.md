@@ -2,17 +2,19 @@
 
 Yêu cầu OS: Cài đặt trên hệ điều hành CentOS7
 
+Mô hình
 <img src="../../img/5.png">
 
 ## Install graphite web on CentOS7
 
+Cài đặt Carbon và Graphite
+
 ```sh
 yum install epel-release -y
 yum --enablerepo=epel -y install graphite-web python-carbon
-
 ```
 
-Bỏ comment và sửa file `/etc/graphite-web/local_settings.py` ở các dòng sau:
+Chỉnh sửa cấu hình, bỏ comment và sửa trong file `/etc/graphite-web/local_settings.py` ở các dòng sau:
 
 ```sh
 ...
@@ -20,7 +22,7 @@ SECRET_KEY = 'UNSAFE_DEFAULT'
 TIME_ZONE = 'Asia/Ho_Chi_Minh'
 ```
 
-File `/etc/httpd/conf.d/graphite-web.conf`
+Cấu hình trong file `/etc/httpd/conf.d/graphite-web.conf`
 
 ```sh
 ...
@@ -35,7 +37,7 @@ Require ip 192.168.20.0/24 # Your ip local
 
 Sau đó nhập username và password để quản trị. `root:ITC*123@654`
 
-Một số tùy chọn khác như:
+Một số tùy chọn thao tác khác như:
 
 * Thay đổi password cho user 
 		
@@ -72,7 +74,7 @@ Nếu muốn log rotation hàng ngày thì sử cấu hình trong file sau: `/et
 
 Nếu để dòng trên với giá trị `False` thì carbon sẽ tự động mở lại file cũ (ngày hôm trước) để tiếp tục ghi, còn nếu để `True` thì hàng ngày logrotate daemon sẽ được thực hiện, và carbon sẽ mổ một file mới để ghi.
 
-#### Cấu hình carbon-schemas.conf
+#### Cấu hình file carbon-schemas.conf
 
 	$ vim /etc/carbon/storage-schemas.conf
 	...
@@ -85,15 +87,16 @@ Nếu để dòng trên với giá trị `False` thì carbon sẽ tự động m
 
 Ngoài ra có thể tham khảo thêm [ở đây](https://github.com/hocchudong/thuctap012017/blob/master/TamNT/Graphite-Collectd-Grafana/docs/5.Cai_dat_Graphite-Collectd.md)
 
-Khởi động lại carbon:
+Khởi động lại carbon-cache:
 
 	systemctl start carbon-cache
 
-Có thể cấu hình thêm phần carbon-relay, để chạy graphite cluster.
-
+Nếu muốn ban có thể cấu hình thêm phần `carbon-relay`, để chạy graphite cluster. Mặc định thì dịch vụ này bị tắt
 
 
 ## Install collectd on CentOS7
+
+Cài đặt gói phần mềm:
 
 	yum update
 	yum install epel-release
@@ -103,7 +106,7 @@ Sửa file cấu hình: `/etc/collectd.conf`
 
 ```sh
 ...
-Hostname    "compute2"
+Hostname    "compute2" # Đặt tên node
 FQDNLookup   false
 ...
 ```
@@ -207,6 +210,8 @@ Nếu bị lỗi với plugin virt thi có thế khi cài đặt bị thiếu g�
 
 ## Install Grafana on CentOS7
 
+Cấu hình như sau trước khia cài đặt
+
 ```sh
 cat > /etc/yum.repos.d/grafana.repo <<'EOF'
 [grafana]
@@ -224,7 +229,7 @@ Install Grafana:
 	yum --enablerepo=grafana -y install grafana initscripts fontconfig
 
 
-File cấu hình:
+Edit the config file:
 
 ```sh
 $ vim /etc/grafana/grafana.ini
@@ -255,7 +260,7 @@ Truy cập vào theo đường link sau: `http://<ip_server_grafana>:3000` với
 
 Sau đó vào giao diện grafana add data source graphite vào để liên kết với graphite server
 
-<img src="3.\ Grafanaimg/img/1.png">
+<img src="../../img/6.png">
 
 
 ## Tham khảo
