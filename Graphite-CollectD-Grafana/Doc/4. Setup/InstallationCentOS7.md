@@ -1,3 +1,9 @@
+# Hướng dẫn cài đặt và cấu hình cụm Graphite + CollectD + Grafana
+
+Yêu cầu OS: Cài đặt trên hệ điều hành CentOS7
+
+<img src="../../img/5.png">
+
 ## Install graphite web on CentOS7
 
 ```sh

@@ -13,5 +13,4 @@ Nó cũng cung cấp một giao diện web cho phép render đồ thị phục v
 
 **Grafana** Là một giao diện đồ họa, thực hiện truy xuất vào cơ sở dữ liệu, ở đây là Graphite (ngoài ra còn hỗ trợ để add nhiều loại data source khác), render nhiều loại đồ thị đa dạng trực quan phục vụ theo nhiều mục đích người dùng.
 
-
-<img src="../../img/2.png">
+<img src="../img/2.png">
