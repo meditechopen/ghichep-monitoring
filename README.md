@@ -1,2 +1,3 @@
 # ghichep-monitoring
-Những ghi chép về monitoring của Meditech
+
+Những ghi chép khi tìm hiểu về monitoring của Meditech
